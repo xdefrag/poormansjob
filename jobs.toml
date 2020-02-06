@@ -1,0 +1,9 @@
+[[job]]
+crontime = "*/2 * * * *"
+timeout = 30000
+command = "ls"
+
+[[job]]
+crontime = "*/5 * * * *"
+timeout = 30000
+command = "ll"
