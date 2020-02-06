@@ -1,9 +1,9 @@
 [[job]]
-crontime = "*/2 * * * *"
-timeout = 30000
-command = "ls"
+crontime = "* * * * *"
+timeout = 3
+command = ["ls"]
 
 [[job]]
-crontime = "*/5 * * * *"
-timeout = 30000
-command = "ll"
+crontime = "* * * * *"
+timeout = 3
+command = ["ls", "-la"]

@@ -12,9 +12,9 @@ import (
 )
 
 type job struct {
-	Command  string        `toml:"command"`
-	Crontime string        `toml:"crontime"`
-	Timeout  time.Duration `toml:"timeout"`
+	Command  []string `toml:"command"`
+	Crontime string   `toml:"crontime"`
+	Timeout  int      `toml:"timeout"`
 }
 
 type jobs struct {
@@ -50,9 +50,9 @@ func main() {
 
 		_, err := c.AddFunc(j.Crontime, func() {
 			ctx := context.Background()
-			ctx, cancel := context.WithTimeout(ctx, j.Timeout)
+			ctx, cancel := context.WithTimeout(ctx, time.Duration(j.Timeout)*time.Second)
 
-			if err := exec.CommandContext(ctx, j.Command).Run(); err != nil {
+			if err := exec.CommandContext(ctx, j.Command[0], j.Command[1:]...).Run(); err != nil {
 				l.Error(err, "error running command", kv...)
 			}
 
